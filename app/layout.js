@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Amit's Stores",
+  title: "Amit Stores",
   description: "Your one-stop shop for everything you need!",
   icons: {
     icon: null, // explicitly remove favicon
