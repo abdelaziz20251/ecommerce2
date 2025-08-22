@@ -37,7 +37,7 @@ export default function Footer() {
                     <h3 className="font-bold mb-4">OUR BRANCHES</h3>
                     <ul className="space-y-2">
                         <li><a href="#">Awel Makram</a></li>
-                        <li><a href="#">El Maadi</a></li>
+                        <li><a href="#">El-Maadi</a></li>
                     </ul>
                 </div>
 
