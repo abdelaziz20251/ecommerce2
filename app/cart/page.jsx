@@ -1,7 +1,7 @@
 "use client";
 import { useCart } from "../context/CartContext";
 import { useMemo } from "react";
-import CheckoutButton from "../components/CheckOutButton";
+import CheckoutButton from "../components/CheckoutButton";
 
 export default function CartPage() {
     const { cart, removeFromCart, updateQuantity } = useCart();

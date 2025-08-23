@@ -4,7 +4,7 @@ import { Search, ShoppingCart, Heart, User, Menu, X, ChevronDown } from "lucide-
 import { useCart } from "../context/CartContext";
 import { useFavorites } from "../context/FavoritesContext"; // ✅ استدعاء الكونتكست الجديد
 import Link from "next/link";
-import CheckoutButton from "./CheckOutButton";
+import CheckoutButton from "./CheckoutButton";
 
 
 export default function Navbar() {
