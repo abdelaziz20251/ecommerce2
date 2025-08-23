@@ -6,7 +6,7 @@ import { useFavorites } from "../context/FavoritesContext"; // ✅ استدعا�
 import Link from "next/link";
 import CheckoutButton from "./CheckoutButton";
 import Image from "next/image";
-import Logo from "../media/images/logo.png";
+import Logo from "../media/images/Logo.png";
 
 
 export default function Navbar() {
