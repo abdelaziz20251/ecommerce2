@@ -63,7 +63,6 @@ export default function Navbar() {
                 {/* Icons */}
                 <div className="flex items-center gap-6">
 
-
                     {/* ❤️ Favorites Dropdown */}
                     <div className="relative">
                         <div
@@ -207,6 +206,25 @@ export default function Navbar() {
                     </button>
                 </div>
             </div>
+
+            {/* Mobile Menu */}
+            {menuOpen && (
+                <div className="md:hidden bg-white shadow-lg p-4 absolute top-0 left-0 w-full z-40">
+                    {/* زرار اغلاق */}
+                    <div className="flex justify-end mb-4">
+                        <button onClick={() => setMenuOpen(false)}>
+                            <X className="w-6 h-6 text-gray-700 hover:text-red-500" />
+                        </button>
+                    </div>
+                    <nav className="flex flex-col gap-4">
+                        <Link href="/" className="hover:text-red-500">Home</Link>
+                        <Link href="/products" className="hover:text-red-500">Products</Link>
+                        <Link href="/contact" className="hover:text-red-500">Contact</Link>
+                        <Link href="/about" className="hover:text-red-500">About</Link>
+                        <Link href="/login" className="hover:text-red-500">Login</Link>
+                    </nav>
+                </div>
+            )}
         </header>
     );
 }

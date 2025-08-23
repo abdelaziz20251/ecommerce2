@@ -1,5 +1,6 @@
 "use client";
 import { useCart } from "../context/CartContext";
+import { ShoppingCart, Check } from "lucide-react";
 
 export default function AddToCartButton({ product, className = "" }) {
     const { addToCart, removeFromCart, cart } = useCart();
@@ -10,14 +11,27 @@ export default function AddToCartButton({ product, className = "" }) {
         <button
             onClick={() => (inCart ? removeFromCart(product.id) : addToCart(product))}
             className={`
-                px-4 py-2 rounded-lg text-sm font-medium transition duration-300
+                flex items-center justify-center gap-1
+                px-3 py-2 rounded-lg text-sm font-medium
+                shadow-sm active:scale-95 transition-all duration-200
                 ${inCart
-                    ? "bg-gray-600 hover:bg-gray-700 text-white"
+                    ? "bg-gray-700 hover:bg-gray-800 text-white"
                     : "bg-red-500 hover:bg-red-600 text-white"}
                 ${className}
             `}
         >
-            {inCart ? "Added" : "Add to Cart"}
+            {inCart ? (
+                <>
+                    <Check className="w-4 h-4" />
+                    Added
+                </>
+            ) : (
+                <>
+                    <ShoppingCart className="w-4 h-4" />
+                    Add
+                </>
+            )}
         </button>
     );
 }
+``
