@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { useCart } from "../context/CartContext";
 import FavoriteButton from "./FavoriteButton"; // استدعاء الزر الجديد
+import AddToCartButton from "./AddToCartButton";
+import ViewDetailsButton from "./ViewDetailsButton";
 
 export default function ProductCard(props) {
     const { cart, addToCart } = useCart();
@@ -49,24 +51,9 @@ export default function ProductCard(props) {
                 </div>
 
                 {/* الأزرار */}
-                <div className="flex flex-row space-x-2 w-full">
-                    <button
-                        onClick={handleAddToCart}
-                        disabled={added}
-                        className={`flex-1 px-3 py-2 rounded text-sm font-medium transition-colors ${added
-                            ? "bg-gray-400 cursor-not-allowed text-white"
-                            : "bg-red-500 hover:bg-red-600 text-white"
-                            }`}
-                    >
-                        {added ? "Added ✅" : "Add to Cart"}
-                    </button>
-
-                    <Link
-                        href={`/product/${props.id}`}
-                        className="flex-1 bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded text-sm text-center"
-                    >
-                        View Details
-                    </Link>
+                <div className="flex gap-2 w-full">
+                    <AddToCartButton product={props} className="flex-1" />
+                    <ViewDetailsButton productId={props.id} className="flex-1" />
                 </div>
             </div>
         </div>

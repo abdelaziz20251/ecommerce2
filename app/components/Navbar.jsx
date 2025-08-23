@@ -29,7 +29,7 @@ export default function Navbar() {
     );
 
     return (
-        <header className="w-full z-50 sticky top-0 bg-white shadow">
+        <header className="w-full z-50 sticky top-0 bg-white shadow-md">
             <div className="container mx-auto flex items-center justify-between py-4 px-4 md:px-8">
                 {/* Logo */}
                 <h1 className="text-2xl font-bold cursor-pointer">Amit Stores</h1>
