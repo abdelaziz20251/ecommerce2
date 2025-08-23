@@ -4,6 +4,8 @@ import { Search, ShoppingCart, Heart, User, Menu, X, ChevronDown } from "lucide-
 import { useCart } from "../context/CartContext";
 import { useFavorites } from "../context/FavoritesContext"; // ✅ استدعاء الكونتكست الجديد
 import Link from "next/link";
+import CheckoutButton from "./CheckOutButton"; // استيراد زر الدفع الجديد
+
 
 export default function Navbar() {
     const { cart, removeFromCart } = useCart();
@@ -177,12 +179,7 @@ export default function Navbar() {
                                             <span>Total:</span>
                                             <span>£{cartTotal.toFixed(2)}</span>
                                         </div>
-                                        <Link
-                                            href="/checkout"
-                                            className="block bg-blue-600 text-white text-center py-2 rounded hover:bg-blue-700"
-                                        >
-                                            Proceed to Checkout
-                                        </Link><br />
+                                        <CheckoutButton cart={cart} /><br />
                                         <Link
                                             href="/cart"
                                             className="block bg-blue-600 text-white text-center py-2 rounded hover:bg-blue-700"
@@ -218,7 +215,24 @@ export default function Navbar() {
                     </div>
                     <nav className="flex flex-col gap-4">
                         <Link href="/" className="hover:text-red-500">Home</Link>
-                        <Link href="/products" className="hover:text-red-500">Products</Link>
+
+                        {/* Dropdown in Burger Menu */}
+                        <div className="relative">
+                            <button
+                                className="flex items-center hover:text-red-500"
+                                onClick={() => setDropdownOpen(!dropdownOpen)}
+                            >
+                                Products <ChevronDown className="w-4 h-4 ml-1" />
+                            </button>
+                            {dropdownOpen && (
+                                <div className="absolute top-full left-0 mt-2 bg-white border rounded-lg shadow-md w-40 z-50">
+                                    <Link href="/products" className="block px-4 py-2 hover:bg-gray-100">Products</Link>
+                                    <Link href="/cart" className="block px-4 py-2 hover:bg-gray-100">Cart</Link>
+                                    <Link href="/favorites" className="block px-4 py-2 hover:bg-gray-100">Favorites</Link>
+                                </div>
+                            )}
+                        </div>
+
                         <Link href="/contact" className="hover:text-red-500">Contact</Link>
                         <Link href="/about" className="hover:text-red-500">About</Link>
                         <Link href="/login" className="hover:text-red-500">Login</Link>

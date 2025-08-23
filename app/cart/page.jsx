@@ -1,6 +1,7 @@
 "use client";
 import { useCart } from "../context/CartContext";
 import { useMemo } from "react";
+import CheckoutButton from "../components/CheckOutButton";
 
 export default function CartPage() {
     const { cart, removeFromCart, updateQuantity } = useCart();
@@ -9,19 +10,6 @@ export default function CartPage() {
     const total = useMemo(() => {
         return cart.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
     }, [cart]);
-
-    // تجهيز نص الرسالة المرسل عبر WhatsApp
-    const generateWhatsAppMessage = () => {
-        let message = "مرحباً! هذا هو طلبك:\n\n";
-        cart.forEach((item) => {
-            message += `${item.title} - ${item.quantity} × $${item.price}\n`;
-        });
-        message += `\nالمجموع النهائي: $${total}\n\nالرجاء تأكيد الطلب.`;
-        return encodeURIComponent(message); // تأكد من ترميز النص بشكل صحيح
-    };
-
-    const whatsappNumber = "+201158300617"; // استبدل برقم الواتساب الخاص بك
-    const whatsappLink = `https://wa.me/${whatsappNumber}?text=${generateWhatsAppMessage()}`;
 
     return (
         <div className="container mx-auto py-10 px-4">
@@ -90,14 +78,12 @@ export default function CartPage() {
                             <span>Total Price:</span>
                             <span className="font-bold text-red-500">${total}</span>
                         </p>
-                        <a
-                            href={whatsappLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-full bg-green-600 text-white py-3 rounded-xl font-semibold hover:bg-green-700 transition"
-                        >
-                            Checkout
-                        </a>
+
+                        {/* ترتيب الأزرار بشكل أفقي */}
+                        <div className="flex gap-4">
+                            {/* استخدام زر CheckoutButton هنا */}
+                            <CheckoutButton cart={cart} />
+                        </div>
                     </div>
                 </div>
             )}
