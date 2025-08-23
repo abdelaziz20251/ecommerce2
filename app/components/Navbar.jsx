@@ -5,6 +5,8 @@ import { useCart } from "../context/CartContext";
 import { useFavorites } from "../context/FavoritesContext"; // ✅ استدعاء الكونتكست الجديد
 import Link from "next/link";
 import CheckoutButton from "./CheckoutButton";
+import Image from "next/image";
+import Logo from "../media/images/logo.png";
 
 
 export default function Navbar() {
@@ -25,6 +27,33 @@ export default function Navbar() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
+    // 👇 إغلاق القائمة المنسدلة عند النقر في أي مكان خارجها
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            // أغلق الـ dropdown إذا تم النقر في أي مكان خارجها
+            if (event.target.closest('.dropdown-menu') === null) {
+                setDropdownOpen(false);
+            }
+
+            // أغلق الـ menu إذا تم النقر في أي مكان خارجها
+            if (event.target.closest('.mobile-menu') === null) {
+                setMenuOpen(false);
+            }
+
+            // أغلق الـ cart والفيفوريتس إذا تم النقر في أي مكان خارجهم
+            if (event.target.closest('.cart-dropdown') === null) {
+                setCartOpen(false);
+            }
+
+            if (event.target.closest('.favorites-dropdown') === null) {
+                setFavoritesOpen(false);
+            }
+        };
+
+        document.addEventListener("click", handleClickOutside);
+        return () => document.removeEventListener("click", handleClickOutside);
+    }, []);
+
     const cartTotal = cart.reduce(
         (acc, item) => acc + item.price * (item.quantity || 1),
         0
@@ -33,15 +62,14 @@ export default function Navbar() {
     return (
         <header className="w-full z-50 sticky top-0 bg-white shadow-md">
             <div className="container mx-auto flex items-center justify-between py-4 px-4 md:px-8">
-                {/* Logo */}
-                <h1 className="text-2xl font-bold cursor-pointer">Amit Stores</h1>
+                <Image src={Logo} alt="Logo" className="text-2xl font-bold cursor-pointer" width={100} height={40} priority />
 
                 {/* Desktop Menu */}
                 <nav className="hidden md:flex gap-6 items-center">
                     <Link href="/" className="hover:text-red-500">Home</Link>
 
                     {/* Dropdown */}
-                    <div className="relative">
+                    <div className="relative dropdown-menu">
                         <button
                             className="flex items-center hover:text-red-500"
                             onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -66,7 +94,7 @@ export default function Navbar() {
                 <div className="flex items-center gap-6">
 
                     {/* ❤️ Favorites Dropdown */}
-                    <div className="relative">
+                    <div className="relative favorites-dropdown">
                         <div
                             className="flex items-center gap-2 cursor-pointer"
                             onClick={() => setFavoritesOpen(!favoritesOpen)}
@@ -125,7 +153,7 @@ export default function Navbar() {
                     </div>
 
                     {/* 🛒 Cart */}
-                    <div className="relative">
+                    <div className="relative cart-dropdown">
                         <div
                             className="flex items-center gap-2 cursor-pointer"
                             onClick={() => setCartOpen(!cartOpen)}
@@ -206,7 +234,7 @@ export default function Navbar() {
 
             {/* Mobile Menu */}
             {menuOpen && (
-                <div className="md:hidden bg-white shadow-lg p-4 absolute top-0 left-0 w-full z-40">
+                <div className="md:hidden bg-white shadow-lg p-4 absolute top-0 left-0 w-full z-40 mobile-menu">
                     {/* زرار اغلاق */}
                     <div className="flex justify-end mb-4">
                         <button onClick={() => setMenuOpen(false)}>

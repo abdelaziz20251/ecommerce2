@@ -38,10 +38,10 @@ export default function HeroCarousel() {
                 {slides.map((slide) => (
                     <div
                         key={slide.id}
-                        className="w-full flex-shrink-0 flex flex-col md:flex-row items-center justify-center h-[450px] text-white px-6 md:px-16 gap-8"
+                        className="w-screen flex-shrink-0 flex flex-col md:flex-row items-center justify-center h-[500px] md:h-[450px] text-white px-6 md:px-16 gap-6 md:gap-10"
                     >
                         {/* النصوص */}
-                        <div className="flex-1">
+                        <div className="flex-1 text-center md:text-left">
                             <h2 className="text-2xl md:text-4xl font-bold mb-4 leading-snug">
                                 {slide.title}
                             </h2>
@@ -49,7 +49,7 @@ export default function HeroCarousel() {
                             <p className="text-lg font-semibold mb-6 text-green-400">
                                 ${slide.price}
                             </p>
-                            <div className="flex gap-3">
+                            <div className="flex gap-3 justify-center md:justify-start">
                                 <AddToCartButton product={slide} className="px-4 py-2 text-sm" />
                                 <ViewDetailsButton productId={slide.id} className="px-4 py-2 text-sm" />
                             </div>
@@ -60,7 +60,7 @@ export default function HeroCarousel() {
                             <img
                                 src={slide.image}
                                 alt={slide.title}
-                                className="object-contain h-[300px] md:h-[400px] drop-shadow-lg"
+                                className="object-contain max-h-[250px] md:max-h-[400px] drop-shadow-lg"
                             />
                         </div>
                     </div>

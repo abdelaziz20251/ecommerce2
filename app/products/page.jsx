@@ -44,6 +44,12 @@ export default function ProductsPage() {
     const currentItems = filtered.slice(indexOfFirstItem, indexOfLastItem);
     const totalPages = Math.ceil(filtered.length / itemsPerPage);
 
+    // 🟢 Scroll to Top when page changes
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+        window.scrollTo(0, 0); // ⬆️ لعمل تمرير الصفحة لأعلى
+    };
+
     return (
         <div className="container mx-auto px-4 py-8">
             <h1 className="text-3xl font-bold mb-6 text-center">Our Products</h1>
@@ -78,7 +84,7 @@ export default function ProductsPage() {
             <div className="flex justify-center items-center gap-2 mt-8">
                 <button
                     disabled={currentPage === 1}
-                    onClick={() => setCurrentPage((prev) => prev - 1)}
+                    onClick={() => handlePageChange(currentPage - 1)}
                     className="px-4 py-2 border rounded disabled:opacity-50"
                 >
                     Prev
@@ -87,7 +93,7 @@ export default function ProductsPage() {
                 {Array.from({ length: totalPages }, (_, i) => (
                     <button
                         key={i + 1}
-                        onClick={() => setCurrentPage(i + 1)}
+                        onClick={() => handlePageChange(i + 1)}
                         className={`px-4 py-2 border rounded ${currentPage === i + 1 ? "bg-blue-500 text-white" : ""
                             }`}
                     >
@@ -97,7 +103,7 @@ export default function ProductsPage() {
 
                 <button
                     disabled={currentPage === totalPages}
-                    onClick={() => setCurrentPage((prev) => prev + 1)}
+                    onClick={() => handlePageChange(currentPage + 1)}
                     className="px-4 py-2 border rounded disabled:opacity-50"
                 >
                     Next
